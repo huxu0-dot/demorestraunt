@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burnaby Palace | Premium Chinese Cuisine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c11f1f;
+            --primary-dark: #8a1616;
+            --secondary: #f8d477;
+            --dark: #1a1a1a;
+            --light: #f5f5f5;
+            --gold: #d4af37;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .language-btn {
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .language-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .language-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            transition: var(--transition);
+            padding: 20px 0;
+        }
+
+        header.scrolled {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 10px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--light);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* User Actions */
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-left: 30px;
+        }
+
+        .user-action {
+            color: var(--light);
+            font-size: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .user-action:hover {
+            color: var(--primary);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--primary);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--light);
+            margin-left: 15px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* About Section */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 42px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 15px auto 0;
+            color: #666;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-img {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+            height: 500px;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-img:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+            z-index: 1;
+        }
+
+        .about-content h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .about-content ul {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .about-content ul li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .about-content ul li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--primary);
+        }
+
+        /* Menu Section */
+        .menu {
+            background: url('https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover fixed;
+            position: relative;
+            color: var(--light);
+        }
+
+        .menu:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .menu .section-title h2 {
+            color: var(--light);
+        }
+
+        .menu .section-title h2:after {
+            background: var(--secondary);
+        }
+
+        .menu .section-title p {
+            color: #ccc;
+        }
+
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .menu-tab-btn {
+            padding: 10px 25px;
+            background: transparent;
+            border: none;
+            color: #ccc;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            margin: 0 10px;
+        }
+
+        .menu-tab-btn:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            bottom: 0;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        .menu-tab-btn:hover, .menu-tab-btn.active {
+            color: var(--light);
+        }
+
+        .menu-tab-btn:hover:after, .menu-tab-btn.active:after {
+            width: 100%;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+            position: relative;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-item:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .menu-item:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .menu-item:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .menu-item:nth-child(4) {
+            animation-delay: 0.8s;
+        }
+
+        .menu-item:nth-child(5) {
+            animation-delay: 1s;
+        }
+
+        .menu-item:nth-child(6) {
+            animation-delay: 1.2s;
+        }
+
+        .menu-item:nth-child(7) {
+            animation-delay: 1.4s;
+        }
+
+        .menu-item:nth-child(8) {
+            animation-delay: 1.6s;
+        }
+
+        .menu-item:nth-child(9) {
+            animation-delay: 1.8s;
+        }
+
+        .menu-item-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .menu-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .menu-item:hover .menu-item-img img {
+            transform: scale(1.1);
+        }
+
+        .menu-item-content {
+            padding: 20px;
+        }
+
+        .menu-item-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .menu-item-title h3 {
+            font-size: 20px;
+            color: var(--secondary);
+        }
+
+        .menu-item-title span {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .menu-item p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .menu-item-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .view-full-menu {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .view-full-menu a {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+        }
+
+        .view-full-menu a:hover {
+            background: transparent;
+            color: var(--primary);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--light);
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .google-reviews {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards 0.3s;
+        }
+
+        /* Hours & Location */
+        .hours-location {
+            background: var(--dark);
+            color: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hours-location:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80') no-repeat center center/cover;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .hours-location .section-title h2 {
+            color: var(--light);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hours-location .section-title h2:after {
+            background: var(--primary);
+        }
+
+        .hours-location .section-title p {
+            color: #ccc;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hl-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hours, .location {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hours h3, .location h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .hours-list {
+            list-style: none;
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+
+        .hours-list li span {
+            color: var(--secondary);
+        }
+
+        .location iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .location p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .visit-us-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            z-index: 1;
+        }
+
+        .visit-us-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .visit-us-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-dark);
+            transition: var(--transition);
+            z-index: 0;
+        }
+
+        .visit-us-btn:hover:before {
+            left: 0;
+        }
+
+        .visit-us-btn:hover {
+            box-shadow: 0 10px 20px rgba(193, 31, 31, 0.3);
+        }
+
+        /* Food Animation Elements */
+        .food-animation {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.8;
+            z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .dumpling {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23f8d477" d="M50 15c-15 0-25 10-25 25s10 25 25 25 25-10 25-25-10-25-25-25zm0 40c-8 0-15-7-15-15s7-15 15-15 15 7 15 15-7 15-15 15z"/></svg>');
+            top: 20%;
+            left: 10%;
+        }
+
+        .noodle {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23f8d477" d="M10 50c0-10 5-20 15-25 10-5 20-5 30 0 10 5 15 15 15 25s-5 20-15 25c-10 5-20 5-30 0-10-5-15-15-15-25z"/></svg>');
+            top: 70%;
+            left: 85%;
+            animation-delay: 1s;
+        }
+
+        .chopsticks {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23c11f1f" d="M20 10l5 80 5-80z"/><path fill="%23c11f1f" d="M30 10l5 80 5-80z"/></svg>');
+            top: 30%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+
+        .tea {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%238a1616" d="M40 30h30v40H40z"/><path fill="%23f8d477" d="M50 40h10v30H50z"/></svg>');
+            top: 80%;
+            left: 15%;
+            animation-delay: 1.5s;
+        }
+
+        /* Gallery */
+        .gallery {
+            padding-bottom: 50px;
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 250px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1;
+        }
+
+        .gallery-item:hover:before {
+            opacity: 1;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, #1a1a1a, #2a2a2a);
+            color: var(--light);
+            padding: 80px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23c11f1f" opacity="0.05" d="M30 50c0-10 5-20 15-25 10-5 20-5 30 0 10 5 15 15 15 25s-5 20-15 25c-10 5-20 5-30 0-10-5-15-15-15-25z"/></svg>');
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .footer-col h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-col p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+        }
+
+        .footer-links li a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--light);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #999;
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Newsletter Form */
+        .newsletter-form {
+            margin-top: 20px;
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 30px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .newsletter-form input::placeholder {
+            color: #ccc;
+        }
+
+        .newsletter-form button {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Food Animation */
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        @keyframes floatHorizontal {
+            0% {
+                transform: translateX(0px);
+            }
+            50% {
+                transform: translateX(20px);
+            }
+            100% {
+                transform: translateX(0px);
+            }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-horizontal {
+            animation: floatHorizontal 4s ease-in-out infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-container, .hl-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-img {
+                height: 400px;
+            }
+
+            .hero h1 {
+                font-size: 60px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.9);
+                backdrop-filter: blur(10px);
+                transition: var(--transition);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .btn-group {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+            }
+
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 70px 0;
+            }
+
+            .user-actions {
+                margin-left: 15px;
+                gap: 15px;
+            }
+
+            .food-animation {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
+            }
+
+            .about-content h3 {
+                font-size: 28px;
+            }
+
+            .hours, .location {
+                padding: 30px 20px;
+            }
+
+            .menu-tab-btn {
+                padding: 8px 15px;
+                font-size: 16px;
+                margin: 5px;
+            }
+
+            .food-animation {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <button class="language-btn active" data-lang="en">EN</button>
+        <button class="language-btn" data-lang="ar">AR</button>
+        <button class="language-btn" data-lang="hi">HI</button>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <img src="images/" alt="Burnaby Palace Logo">
+                Burnaby <span>Palace</span>
+            </a>
+            <nav id="nav">
+                <ul>
+                    <li><a href="#home" class="nav-link" data-key="home">Home</a></li>
+                    <li><a href="#about" class="nav-link" data-key="about">About</a></li>
+                    <li><a href="#menu" class="nav-link" data-key="menu">Menu</a></li>
+                    <li><a href="#testimonials" class="nav-link" data-key="testimonials">Testimonials</a></li>
+                    <li><a href="#hours-location" class="nav-link" data-key="hoursLocation">Hours & Location</a></li>
+                    <li><a href="#gallery" class="nav-link" data-key="gallery">Gallery</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <a href="#" class="user-action" id="loginBtn">
+                    <i class="fas fa-user"></i>
+                </a>
+                <a href="#" class="user-action" id="cartBtn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1><span data-key="heroTitle1">Premium Chinese Cuisine</span> <br><span data-key="heroTitle2">In Burnaby</span></h1>
+            <p data-key="heroText">Burnaby Palace offers delicious dining, takeout and delivery of modern Chinese cuisine using only the highest quality fresh ingredients.</p>
+            <div class="btn-group">
+                <a href="#menu" class="btn" data-key="viewMenu">View Menu</a>
+                <a href="https://cdn3.didevelop.com/public/files/73cca73cafa98f2fc265d618e70d0a36.pdf" class="btn btn-secondary" data-key="diveInMenu" target="_blank">Dive-In Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="section-title">
+            <h2 data-key="aboutTitle">Our Story</h2>
+            <p data-key="aboutSubtitle">A modern interpretation of classic Chinese dishes</p>
+        </div>
+        <div class="about-container">
+            <div class="about-img floating">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Restaurant Interior">
+            </div>
+            <div class="about-content">
+                <h3 data-key="aboutHeading">Welcome to Burnaby Palace</h3>
+                <p data-key="aboutText1">Burnaby Palace is a cornerstone in the Burnaby community and has been recognized for its outstanding Chinese cuisine, excellent service and friendly staff.</p>
+                <p data-key="aboutText2">Our Chinese restaurant is known for its modern interpretation of classic dishes and its insistence on only using high quality fresh ingredients.</p>
+                <ul>
+                    <li data-key="aboutFeature1">Authentic Chinese flavors with a modern twist</li>
+                    <li data-key="aboutFeature2">Fresh ingredients sourced daily</li>
+                    <li data-key="aboutFeature3">Expert chefs with decades of experience</li>
+                    <li data-key="aboutFeature4">Warm, inviting atmosphere</li>
+                </ul>
+                <button class="visit-us-btn"><span data-key="visitUs">Visit Us</span></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="section menu" id="menu">
+        <div class="section-title">
+            <h2 data-key="menuTitle">Our Menu</h2>
+            <p data-key="menuSubtitle">Experience the taste of authentic Chinese cuisine</p>
+        </div>
+        <div class="menu-container">
+            <div class="menu-tabs">
+                <button class="menu-tab-btn active" data-category="appetizers" data-key="appetizers">Appetizers</button>
+                <button class="menu-tab-btn" data-category="main-courses" data-key="mainCourses">Main Courses</button>
+                <button class="menu-tab-btn" data-category="noodles-rice" data-key="noodlesRice">Noodles & Rice</button>
+                <button class="menu-tab-btn" data-category="desserts" data-key="desserts">Desserts</button>
+                <button class="menu-tab-btn" data-category="drinks" data-key="drinks">Drinks</button>
+            </div>
+            <div class="menu-items">
+                <!-- Appetizers -->
+                <div class="menu-item" data-category="appetizers">
+                    <div class="menu-item-badge" data-key="popular">Popular</div>
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1392&q=80" alt="Spring Rolls">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3 data-key="item1Name">Spring Rolls</h3>
+                            <span>$6.99</span>
+                        </div>
+                        <p data-key="item1Desc">Crispy vegetable spring rolls served with sweet chili sauce</p>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="appetizers">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Dumplings">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3 data-key="item2Name">Steamed Dumplings</h3>
+                            <span>$8.99</span>
+                        </div>
+                        <p data-key="item2Desc">Pork and vegetable dumplings served with soy-vinegar dipping sauce</p>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="appetizers">
+                    <div class="menu-item-badge" data-key="new">New</div>
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Wonton Soup">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3 data-key="item7Name">Wonton Soup</h3>
+                            <span>$7.99</span>
+                        </div>
+                        <p data-key="item7Desc">Delicate wontons filled with shrimp and pork in a clear broth</p>
+                    </div>
+                </div>
+                
+                <!-- Main Courses -->
+                <div class="menu-item" data-category="main-courses">
+                    <div class="menu-item-badge" data-key="chefSpecial">Chef's Special</div>
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Kung Pao Chicken">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3 data-key="item3Name">Kung Pao Chicken</h3>
+                            <span>$14.99</span>
+                        </div>
+                        <p data-key="item3Desc">Stir-fried chicken with peanuts, vegetables, and chili peppers in a savory sauce</p>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="main-courses">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1527&q=80" alt="Beef with Broccoli">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3 data-key="item4Name">Beef with Broccoli</h3>
+                            <span>$16.99</span>
+                        </div>
+                        <p data-key="item4Desc">Tender beef strips stir-fried with fresh broccoli in a garlic sauce</p>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="main-courses">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1563245375-5eb22ce6d0e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Sweet and Sour Pork">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3 data-key="item8Name">Sweet and Sour Pork</h3>
+                            <span>$15.99</span>
+                        </div>
+                        <p data-key="item8Desc">Crispy pork pieces with bell peppers, pineapple in a tangy sauce</p>
+                    </div>
+                </div>
+                
+                <!-- Noodles & Rice -->
+                <div class="menu-item" data-category="noodles-rice">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Fried Rice">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3 data-key="item5Name">Yangzhou Fried Rice</h3>
+                            <span>$12.99</span>
+                        </div>
+                        <p data-key="item5Desc">Classic fried rice with eggs, shrimp, ham, and vegetables</p>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="noodles-rice">
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Chow Mein">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3 data-key="item6Name">Cantonese Chow Mein</h3>
+                            <span>$13.99</span>
+                        </div>
+                        <p data-key="item6Desc">Crispy noodles topped with chicken, shrimp, and vegetables in a light sauce</p>
+                    </div>
+                </div>
+                <div class="menu-item" data-category="noodles-rice">
+                    <div class="menu-item-badge" data-key="spicy">Spicy</div>
+                    <div class="menu-item-img">
+                        <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1392&q=80" alt="Dan Dan Noodles">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3 data-key="item9Name">Dan Dan Noodles</h3>
+                            <span>$11.99</span>
+                        </div>
+                        <p data-key="item9Desc">Spicy Sichuan noodles with minced pork and peanut sauce</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="view-full-menu">
+                <a href="#" data-key="viewFullMenu">View Whole Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials" id="testimonials">
+        <div class="section-title">
+            <h2 data-key="testimonialsTitle">What Our Guests Say</h2>
+            <p data-key="testimonialsSubtitle">Hear from our satisfied customers</p>
+        </div>
+        <div class="testimonials-container">
+            <div class="google-reviews">
+                <!-- Elfsight Google Reviews Widget -->
+                <script src="https://static.elfsight.com/platform/platform.js" async></script>
+                <div class="elfsight-app-68dab597-2bbc-4f17-b194-2aaae6c75e85" data-elfsight-app-lazy></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location Section -->
+    <section class="section hours-location" id="hours-location">
+        <!-- Food Animation Elements -->
+        <div class="food-animation dumpling"></div>
+        <div class="food-animation noodle"></div>
+        <div class="food-animation chopsticks"></div>
+        <div class="food-animation tea"></div>
+        
+        <div class="section-title">
+            <h2 data-key="hoursLocationTitle">Visit Us</h2>
+            <p data-key="hoursLocationSubtitle">We look forward to serving you</p>
+        </div>
+        <div class="hl-container">
+            <div class="hours">
+                <h3 data-key="hoursHeading">Opening Hours</h3>
+                <ul class="hours-list">
+                    <li><span data-key="monday">Monday</span> <span>11:00am - 9:00pm</span></li>
+                    <li><span data-key="tuesday">Tuesday</span> <span>11:00am - 9:00pm</span></li>
+                    <li><span data-key="wednesday">Wednesday</span> <span>11:00am - 9:00pm</span></li>
+                    <li><span data-key="thursday">Thursday</span> <span>11:00am - 9:00pm</span></li>
+                    <li><span data-key="friday">Friday</span> <span>11:00am - 9:00pm</span></li>
+                    <li><span data-key="saturday">Saturday</span> <span>11:00am - 9:00pm</span></li>
+                    <li><span data-key="sunday">Sunday</span> <span>11:00am - 9:00pm</span></li>
+                </ul>
+                <a href="tel:+1234567890" class="btn" data-key="callUs">Call Us</a>
+            </div>
+            <div class="location">
+                <h3 data-key="locationHeading">Our Location</h3>
+                <p data-key="locationAddress">1234 Kingsway, Burnaby, BC V5H 3Z5, Canada</p>
+                <p data-key="locationPhone">Phone: +1 (604) 123-4567</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2606.041384600941!2d-123.0135827!3d49.227826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDnCsDEzJzQwLjIiTiAxMjPCsDAwJzQ4LjkiVw!5e0!3m2!1sen!2sca!4v1620000000000!5m2!1sen!2sca" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery" id="gallery">
+        <div class="section-title">
+            <h2 data-key="galleryTitle">Gallery</h2>
+            <p data-key="gallerySubtitle">A glimpse of our restaurant and dishes</p>
+        </div>
+        <div class="gallery-container">
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Restaurant Interior">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Dining Area">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1392&q=80" alt="Spring Rolls">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Kung Pao Chicken">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Fried Rice">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Chef Preparing Food">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-pattern"></div>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3 data-key="footerAbout">About Us</h3>
+                <p data-key="footerAboutText">Burnaby Palace is a cornerstone in the Burnaby community, recognized for outstanding Chinese cuisine, excellent service and friendly staff.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/burnaby.palace/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3 data-key="footerLinks">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home" data-key="footerHome">Home</a></li>
+                    <li><a href="#about" data-key="footerAboutLink">About</a></li>
+                    <li><a href="#menu" data-key="footerMenu">Menu</a></li>
+                    <li><a href="#testimonials" data-key="footerTestimonials">Testimonials</a></li>
+                    <li><a href="#hours-location" data-key="footerContact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 data-key="footerContact">Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> <span data-key="footerAddress">1234 Kingsway, Burnaby, BC V5H 3Z5</span></p>
+                <p><i class="fas fa-phone"></i> <span>+1 (604) 123-4567</span></p>
+                <p><i class="fas fa-envelope"></i> <span>info@burnabypalace.com</span></p>
+                <p><i class="fas fa-clock"></i> <span data-key="footerHours">Open Daily: 11:00am - 9:00pm</span></p>
+            </div>
+            <div class="footer-col">
+                <h3 data-key="footerNewsletter">Newsletter</h3>
+                <p data-key="footerNewsletterText">Subscribe to our newsletter for special offers and updates</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit" data-key="footerSubscribe">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> <span data-key="footerRights">Burnaby Palace. All Rights Reserved.</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Current Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const nav = document.getElementById('nav');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            nav.classList.toggle('active');
+            this.innerHTML = nav.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (this.getAttribute('href') === '#') return;
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (nav.classList.contains('active')) {
+                        nav.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+
+        // Menu Tab System
+        const menuTabBtns = document.querySelectorAll('.menu-tab-btn');
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        menuTabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                menuTabBtns.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                
+                // Show/hide menu items based on category
+                menuItems.forEach(item => {
+                    if (category === 'all' || item.getAttribute('data-category') === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Language Translation System
+        const translations = {
+            en: {
+                home: "Home",
+                about: "About",
+                menu: "Menu",
+                testimonials: "Testimonials",
+                hoursLocation: "Hours & Location",
+                gallery: "Gallery",
+                heroTitle1: "Premium Chinese Cuisine",
+                heroTitle2: "In Burnaby",
+                heroText: "Burnaby Palace offers delicious dining, takeout and delivery of modern Chinese cuisine using only the highest quality fresh ingredients.",
+                viewMenu: "View Menu",
+                diveInMenu: "Dive-In Menu",
+                reservations: "Reservations",
+                aboutTitle: "Our Story",
+                aboutSubtitle: "A modern interpretation of classic Chinese dishes",
+                aboutHeading: "Welcome to Burnaby Palace",
+                aboutText1: "Burnaby Palace is a cornerstone in the Burnaby community and has been recognized for its outstanding Chinese cuisine, excellent service and friendly staff.",
+                aboutText2: "Our Chinese restaurant is known for its modern interpretation of classic dishes and its insistence on only using high quality fresh ingredients.",
+                aboutFeature1: "Authentic Chinese flavors with a modern twist",
+                aboutFeature2: "Fresh ingredients sourced daily",
+                aboutFeature3: "Expert chefs with decades of experience",
+                aboutFeature4: "Warm, inviting atmosphere",
+                visitUs: "Visit Us",
+                menuTitle: "Our Menu",
+                menuSubtitle: "Experience the taste of authentic Chinese cuisine",
+                appetizers: "Appetizers",
+                mainCourses: "Main Courses",
+                noodlesRice: "Noodles & Rice",
+                desserts: "Desserts",
+                drinks: "Drinks",
+                item1Name: "Spring Rolls",
+                item1Desc: "Crispy vegetable spring rolls served with sweet chili sauce",
+                item2Name: "Steamed Dumplings",
+                item2Desc: "Pork and vegetable dumplings served with soy-vinegar dipping sauce",
+                item3Name: "Kung Pao Chicken",
+                item3Desc: "Stir-fried chicken with peanuts, vegetables, and chili peppers in a savory sauce",
+                item4Name: "Beef with Broccoli",
+                item4Desc: "Tender beef strips stir-fried with fresh broccoli in a garlic sauce",
+                item5Name: "Yangzhou Fried Rice",
+                item5Desc: "Classic fried rice with eggs, shrimp, ham, and vegetables",
+                item6Name: "Cantonese Chow Mein",
+                item6Desc: "Crispy noodles topped with chicken, shrimp, and vegetables in a light sauce",
+                item7Name: "Wonton Soup",
+                item7Desc: "Delicate wontons filled with shrimp and pork in a clear broth",
+                item8Name: "Sweet and Sour Pork",
+                item8Desc: "Crispy pork pieces with bell peppers, pineapple in a tangy sauce",
+                item9Name: "Dan Dan Noodles",
+                item9Desc: "Spicy Sichuan noodles with minced pork and peanut sauce",
+                viewFullMenu: "View Whole Menu",
+                popular: "Popular",
+                new: "New",
+                chefSpecial: "Chef's Special",
+                spicy: "Spicy",
+                testimonialsTitle: "What Our Guests Say",
+                testimonialsSubtitle: "Hear from our satisfied customers",
+                hoursLocationTitle: "Visit Us",
+                hoursLocationSubtitle: "We look forward to serving you",
+                hoursHeading: "Opening Hours",
+                monday: "Monday",
+                tuesday: "Tuesday",
+                wednesday: "Wednesday",
+                thursday: "Thursday",
+                friday: "Friday",
+                saturday: "Saturday",
+                sunday: "Sunday",
+                callUs: "Call Us",
+                locationHeading: "Our Location",
+                locationAddress: "1234 Kingsway, Burnaby, BC V5H 3Z5, Canada",
+                locationPhone: "Phone: +1 (604) 123-4567",
+                galleryTitle: "Gallery",
+                gallerySubtitle: "A glimpse of our restaurant and dishes",
+                footerAbout: "About Us",
+                footerAboutText: "Burnaby Palace is a cornerstone in the Burnaby community, recognized for outstanding Chinese cuisine, excellent service and friendly staff.",
+                footerLinks: "Quick Links",
+                footerHome: "Home",
+                footerAboutLink: "About",
+                footerMenu: "Menu",
+                footerTestimonials: "Testimonials",
+                footerContact: "Contact",
+                footerRights: "Burnaby Palace. All Rights Reserved.",
+                footerAddress: "1234 Kingsway, Burnaby, BC V5H 3Z5",
+                footerHours: "Open Daily: 11:00am - 9:00pm",
+                footerNewsletter: "Newsletter",
+                footerNewsletterText: "Subscribe to our newsletter for special offers and updates",
+                footerSubscribe: "Subscribe"
+            },
+            ar: {
+                home: "الصفحة الرئيسية",
+                about: "معلومات عنا",
+                menu: "قائمة الطعام",
+                testimonials: "آراء العملاء",
+                hoursLocation: "ساعات العمل والموقع",
+                gallery: "معرض الصور",
+                heroTitle1: "المطبخ الصيني الممتاز",
+                heroTitle2: "في بيرنابي",
+                heroText: "يقدم قصر بيرنابي وجبات لذيذة وتوصيل طلبات للمأكولات الصينية الحديثة باستخدام أعلى المكونات الطازجة جودة فقط.",
+                viewMenu: "عرض القائمة",
+                diveInMenu: "قائمة الغوص",
+                reservations: "حجوزات",
+                aboutTitle: "قصتنا",
+                aboutSubtitle: "تفسير حديث للأطباق الصينية الكلاسيكية",
+                aboutHeading: "مرحبًا بكم في قصر بيرنابي",
+                aboutText1: "قصر بيرنابي هو حجر الزاوية في مجتمع بيرنابي وقد تم الاعتراف به لمطبخه الصيني الممتاز وخدمته الرائعة وموظفيه الودودين.",
+                aboutText2: "يشتهر مطعمنا الصيني بتفسيره الحديث للأطباق الكلاسيكية وإصراره على استخدام مكونات طازجة عالية الجودة فقط.",
+                aboutFeature1: "نكهات صينية أصيلة مع لمسة عصرية",
+                aboutFeature2: "مكونات طازجة يتم توريدها يوميًا",
+                aboutFeature3: "طهاة خبراء مع عقود من الخبرة",
+                aboutFeature4: "جو دافئ وجذاب",
+                visitUs: "زورونا",
+                menuTitle: "قائمتنا",
+                menuSubtitle: "جرب طعم المطبخ الصيني الأصيل",
+                appetizers: "المقبلات",
+                mainCourses: "الأطباق الرئيسية",
+                noodlesRice: "المعكرونة والأرز",
+                desserts: "الحلويات",
+                drinks: "المشروبات",
+                item1Name: "سبرنج رولز",
+                item1Desc: "سبرنج رولز نباتية مقرمشة تقدم مع صلصة الفلفل الحلو",
+                item2Name: "زلابية على البخار",
+                item2Desc: "زلابية لحم وخضار تقدم مع صلصة صويا وخل",
+                item3Name: "دجاج كونج باو",
+                item3Desc: "دجاج مقلي مع الفول السوداني والخضار والفلفل الحار في صلصة لذيذة",
+                item4Name: "لحم بقري مع بروكلي",
+                item4Desc: "شرائح لحم بقري طرية مقلية مع بروكلي طازج في صلصة ثوم",
+                item5Name: "أرز يانغتشو المقلي",
+                item5Desc: "أرز مقلي كلاسيكي مع بيض وروبيان ولحم خنزير وخضار",
+                item6Name: "تشاو مين كانتوني",
+                item6Desc: "نودلز مقرمشة مع دجاج وروبيان وخضار في صلصة خفيفة",
+                item7Name: "شوربة وونتون",
+                item7Desc: "وونتون لطيف محشو بالروبيان ولحم الخنزير في مرق صافي",
+                item8Name: "لحم الخنزير الحلو والحامض",
+                item8Desc: "قطع لحم خنزير مقرمشة مع فلفل حلو وأناناس في صلصة لاذعة",
+                item9Name: "نودلز دان دان",
+                item9Desc: "نودلز سيتشوان الحارة مع لحم الخنزير المفروم وصلصة الفول السوداني",
+                viewFullMenu: "عرض القائمة الكاملة",
+                popular: "شائع",
+                new: "جديد",
+                chefSpecial: "اختيار الشيف",
+                spicy: "حار",
+                testimonialsTitle: "ما يقوله ضيوفنا",
+                testimonialsSubtitle: "استمع إلى آراء عملائنا الراضين",
+                hoursLocationTitle: "زورونا",
+                hoursLocationSubtitle: "نتطلع لخدمتكم",
+                hoursHeading: "ساعات العمل",
+                monday: "الاثنين",
+                tuesday: "الثلاثاء",
+                wednesday: "الأربعاء",
+                thursday: "الخميس",
+                friday: "الجمعة",
+                saturday: "السبت",
+                sunday: "الأحد",
+                callUs: "اتصل بنا",
+                locationHeading: "موقعنا",
+                locationAddress: "1234 كينغزواي، بيرنابي، كولومبيا البريطانية V5H 3Z5، كندا",
+                locationPhone: "الهاتف: +1 (604) 123-4567",
+                galleryTitle: "معرض الصور",
+                gallerySubtitle: "لمحة عن مطعمنا وأطباقنا",
+                footerAbout: "معلومات عنا",
+                footerAboutText: "قصر بيرنابي هو حجر الزاوية في مجتمع بيرنابي، معروف بمطبخه الصيني الممتاز وخدمته الرائعة وموظفيه الودودين.",
+                footerLinks: "روابط سريعة",
+                footerHome: "الصفحة الرئيسية",
+                footerAboutLink: "معلومات عنا",
+                footerMenu: "قائمة الطعام",
+                footerTestimonials: "آراء العملاء",
+                footerContact: "اتصل بنا",
+                footerRights: "قصر بيرنابي. جميع الحقوق محفوظة.",
+                footerAddress: "1234 كينغزواي، بيرنابي، كولومبيا البريطانية V5H 3Z5",
+                footerHours: "مفتوح يوميًا: 11:00 صباحًا - 9:00 مساءً",
+                footerNewsletter: "النشرة الإخبارية",
+                footerNewsletterText: "اشترك في نشرتنا الإخبارية للحصول على عروض خاصة وتحديثات",
+                footerSubscribe: "اشتراك"
+            },
+            hi: {
+                home: "होम",
+                about: "हमारे बारे में",
+                menu: "मेनू",
+                testimonials: "ग्राहक समीक्षा",
+                hoursLocation: "समय और स्थान",
+                gallery: "गैलरी",
+                heroTitle1: "प्रीमियम चाइनीज़ भोजन",
+                heroTitle2: "बर्नाबी में",
+                heroText: "बर्नाबी पैलेस आधुनिक चाइनीज़ व्यंजनों का स्वादिष्ट भोजन, टेकआउट और डिलीवरी प्रदान करता है जिसमें केवल उच्चतम गुणवत्ता वाली ताज़ा सामग्री का उपयोग किया जाता है।",
+                viewMenu: "मेनू देखें",
+                diveInMenu: "डाइव-इन मेनू",
+                reservations: "आरक्षण",
+                aboutTitle: "हमारी कहानी",
+                aboutSubtitle: "क्लासिक चाइनीज़ व्यंजनों का आधुनिक संस्करण",
+                aboutHeading: "बर्नाबी पैलेस में आपका स्वागत है",
+                aboutText1: "बर्नाबी पैलेस बर्नाबी समुदाय में एक महत्वपूर्ण स्थान रखता है और इसके उत्कृष्ट चाइनीज़ भोजन, बेहतरीन सेवा और मित्रवत स्टाफ के लिए जाना जाता है।",
+                aboutText2: "हमारा चाइनीज़ रेस्तरां क्लासिक व्यंजनों के आधुनिक संस्करण और केवल उच्च गुणवत्ता वाली ताज़ा सामग्री के उपयोग के लिए जाना जाता है।",
+                aboutFeature1: "आधुनिक ट्विस्ट के साथ प्रामाणिक चाइनीज़ स्वाद",
+                aboutFeature2: "रोज़ाना ताज़ी सामग्री",
+                aboutFeature3: "दशकों के अनुभव वाले विशेषज्ञ शेफ",
+                aboutFeature4: "गर्मजोशी भरा और आकर्षक माहौल",
+                visitUs: "हमें देखें",
+                menuTitle: "हमारा मेनू",
+                menuSubtitle: "प्रामाणिक चाइनीज़ भोजन का स्वाद लें",
+                appetizers: "स्टार्टर",
+                mainCourses: "मेन कोर्स",
+                noodlesRice: "नूडल्स और चावल",
+                desserts: "डेज़र्ट",
+                drinks: "पेय",
+                item1Name: "स्प्रिंग रोल",
+                item1Desc: "कुरकुरे वेजिटेबल स्प्रिंग रोल्स मीठी चिली सॉस के साथ",
+                item2Name: "स्टीम्ड डम्पलिंग",
+                item2Desc: "पोर्क और वेजिटेबल डम्पलिंग्स सोया-विनेगर डिपिंग सॉस के साथ",
+                item3Name: "कुंग पाओ चिकन",
+                item3Desc: "मूंगफली, सब्जियों और मिर्च के साथ चिकन की स्टर फ्राई",
+                item4Name: "ब्रोकोली के साथ बीफ",
+                item4Desc: "लहसुन सॉस में ताज़ा ब्रोकोली के साथ नरम बीफ स्ट्रिप्स",
+                item5Name: "यांगझोउ फ्राइड राइस",
+                item5Desc: "अंडे, झींगा, हैम और सब्जियों के साथ क्लासिक फ्राइड राइस",
+                item6Name: "कैंटोनी चाउ मीन",
+                item6Desc: "कुरकुरे नूडल्स पर चिकन, झींगा और सब्जियों की हल्की सॉस के साथ परत",
+                item7Name: "वोंटन सूप",
+                item7Desc: "झींगा और पोर्क से भरे नाजुक वोंटन साफ शोरबा में",
+                item8Name: "स्वीट एंड सोर पोर्क",
+                item8Desc: "बेल पेपर और अनानास के साथ कुरकुरे पोर्क के टुकड़े तीखी चटनी में",
+                item9Name: "दान दान नूडल्स",
+                item9Desc: "कीमा बनाया हुआ पोर्क और मूंगफली की चटनी के साथ मसालेदार सिचुआन नूडल्स",
+                viewFullMenu: "पूरा मेनू देखें",
+                popular: "लोकप्रिय",
+                new: "नया",
+                chefSpecial: "शेफ की विशेष",
+                spicy: "मसालेदार",
+                testimonialsTitle: "हमारे ग्राहक क्या कहते हैं",
+                testimonialsSubtitle: "हमारे संतुष्ट ग्राहकों की राय सुनें",
+                hoursLocationTitle: "हमें देखें",
+                hoursLocationSubtitle: "आपकी सेवा के लिए तत्पर",
+                hoursHeading: "खुलने का समय",
+                monday: "सोमवार",
+                tuesday: "मंगलवार",
+                wednesday: "बुधवार",
+                thursday: "गुरुवार",
+                friday: "शुक्रवार",
+                saturday: "शनिवार",
+                sunday: "रविवार",
+                callUs: "हमें कॉल करें",
+                locationHeading: "हमारा स्थान",
+                locationAddress: "1234 किंग्सवे, बर्नाबी, बीसी V5H 3Z5, कनाडा",
+                locationPhone: "फोन: +1 (604) 123-4567",
+                galleryTitle: "गैलरी",
+                gallerySubtitle: "हमारे रेस्तरां और व्यंजनों की झलक",
+                footerAbout: "हमारे बारे में",
+                footerAboutText: "बर्नाबी पैलेस बर्नाबी समुदाय में एक महत्वपूर्ण स्थान रखता है और इसके उत्कृष्ट चाइनीज़ भोजन, बेहतरीन सेवा और मित्रवत स्टाफ के लिए जाना जाता है।",
+                footerLinks: "त्वरित लिंक",
+                footerHome: "होम",
+                footerAboutLink: "हमारे बारे में",
+                footerMenu: "मेनू",
+                footerTestimonials: "ग्राहक समीक्षा",
+                footerContact: "संपर्क करें",
+                footerRights: "बर्नाबी पैलेस। सर्वाधिकार सुरक्षित।",
+                footerAddress: "1234 किंग्सवे, बर्नाबी, बीसी V5H 3Z5",
+                footerHours: "दैनिक खुला: सुबह 11:00 - रात 9:00",
+                footerNewsletter: "न्यूज़लेटर",
+                footerNewsletterText: "विशेष ऑफ़र और अपडेट के लिए हमारे न्यूज़लेटर की सदस्यता लें",
+                footerSubscribe: "सदस्यता लें"
+            }
+        };
+
+        const languageBtns = document.querySelectorAll('.language-btn');
+        let currentLang = 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            
+            // Update active button
+            languageBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update all elements with data-key attribute
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.value = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Update RTL for Arabic
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+            } else {
+                document.documentElement.dir = 'ltr';
+                document.documentElement.lang = lang;
+            }
+        }
+
+        languageBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const lang = this.getAttribute('data-lang');
+                setLanguage(lang);
+            });
+        });
+
+        // Initialize with English
+        setLanguage('en');
+
+        // Cart and Login buttons functionality
+        const cartBtn = document.getElementById('cartBtn');
+        const loginBtn = document.getElementById('loginBtn');
+
+        cartBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Cart functionality will be added soon!');
+        });
+
+        loginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Login functionality will be added soon!');
+        });
+    </script>
+</body>
+</html>
